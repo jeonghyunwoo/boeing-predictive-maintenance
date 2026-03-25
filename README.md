@@ -1,22 +1,68 @@
-# Aircraft Engine Predictive Maintenance & GenAI Assistant
+# Boeing Predictive Maintenance Portfolio
+**Remaining Useful Life (RUL) Prediction and Maintenance Brief Generation using NASA CMAPSS**
 
-## Project Overview
-항공기 엔진 센서 데이터를 분석하여 잔여 수명(RUL, Remaining Useful Life)을 예측하고, 예측 결과를 바탕으로 LLM 기반의 자동화된 정비 가이드를 생성하는 프로젝트입니다. 
-단순 고장 예측을 넘어, 예지 보전(Predictive Maintenance) 시스템과 생성형 AI를 결합하여 유지보수 비용을 최적화하고 엔지니어의 의사결정을 지원하는 파이프라인을 구축했습니다.
+## Overview
+This project is a predictive maintenance portfolio built for the Boeing Data Scientist application.  
+Using the NASA CMAPSS turbofan engine degradation dataset, it predicts Remaining Useful Life (RUL) from multivariate time-series sensor data and generates an action-oriented maintenance brief for a selected engine.
 
-## Business Impact
-* 운영 효율화: 대규모 시계열 데이터 분석을 통해 사전 정비 시기를 도출하여 예기치 않은 비행 지연(Downtime) 방지.
-* 프로세스 자동화: 예측된 RUL 수치를 기반으로 LangChain과 Vertex AI를 활용해 맞춤형 정비 리포트 자동 생성.
+The goal of this project is not only to build an accurate regression model, but also to demonstrate a practical data science workflow aligned with real-world industrial use cases:
+- time-series and tabular data analysis
+- feature engineering from complex sensor signals
+- model evaluation and validation
+- operational interpretation of predictions
+- structured reporting for decision support
 
-## Tech Stack
-* Data Science & ML: Python, Pandas, Scikit-learn, XGBoost
-* AI Engineering: LangChain, Google Vertex AI (Gemini)
-* Domain: Time-series Analysis, Predictive Maintenance
+## Why This Project Fits Boeing
+The Boeing Data Scientist role emphasizes:
+- large-scale time-series and tabular data analysis
+- predictive modeling and forecasting
+- experimentation and model validation
+- robust data pipelines and automated workflows
+- clear communication of findings through reports and visualizations
+- well-organized Git repositories
 
-## Key Features
-1. Data Preprocessing & EDA: 다중 센서 데이터의 노이즈 제거 및 시계열 이동 평균(Rolling Mean) 특성 추출.
-2. RUL Prediction Model: XGBoost 회귀 모델을 활용한 엔진별 고장 도달 비행 횟수(Cycle) 예측.
-3. Automated Maintenance Report (GenAI): 예측된 고장 위험도에 따라 정비사에게 필요한 조치 사항을 LLM으로 자동 요약 및 브리핑.
+This repository is designed to reflect those requirements through an end-to-end prototype:
+1. preprocessing raw sensor data
+2. engineering rolling-window features
+3. training and evaluating an RUL prediction model
+4. visualizing model outputs
+5. generating a maintenance-oriented summary from prediction results
 
-## Purpose
-RUL(잔여 수명) 예측 모델과 LLM을 결합한 데이터 처리 파이프라인 구현을 목적으로 합니다.
+## My Perspective
+My professional background has centered on predictive analytics, time-series modeling, NLP, and decision-support systems in high-stakes financial environments. Across KakaoPay and Kyobo Life, I have built predictive models, monitoring frameworks, automated data pipelines, and business-facing reporting systems using Python, R, SQL, and statistical modeling. This project translates that core workflow into an aerospace-style operational analytics problem.
+
+## Dataset
+- **Source**: NASA CMAPSS Turbofan Engine Degradation Simulation Dataset
+- **Scenario used**: FD001
+- **Data type**: multivariate time-series
+- **Prediction target**: Remaining Useful Life (RUL)
+
+The dataset contains:
+- engine unit ID
+- time cycle
+- operational settings
+- multiple sensor measurements across engine operating cycles
+
+## Problem Statement
+Aircraft engine maintenance is a classic decision-support problem under uncertainty.  
+The objective is to estimate how many operating cycles remain before an engine reaches a failure threshold, then translate that prediction into a practical maintenance recommendation.
+
+In this prototype:
+- the model predicts RUL for each engine
+- the final-cycle prediction is used to estimate urgency
+- a maintenance brief is generated to support human interpretation
+
+## Project Structure
+```bash
+boeing-predictive-maintenance/
+├─ data/
+│  ├─ train_FD001.txt
+│  ├─ test_FD001.txt
+│  └─ RUL_FD001.txt
+├─ notebooks/
+│  └─ boeing_predictive_maintenance.ipynb
+├─ outputs/
+│  ├─ fd001_test_predictions.csv
+│  └─ sample_engine_maintenance_report.md
+├─ README.md
+└─ requirements.txt
