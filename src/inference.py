@@ -1,1 +1,3 @@
-"""Inference utilities for engine-level RUL prediction."""
+"""
+Inference utilities for predicting engine Remaining Useful Life.
+"""
