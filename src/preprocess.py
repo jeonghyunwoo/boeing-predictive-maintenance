@@ -1,1 +1,3 @@
-"""Data preprocessing utilities for the Boeing predictive maintenance project."""
+"""
+Data preprocessing utilities for CMAPSS dataset.
+"""
