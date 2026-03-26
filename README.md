@@ -1,5 +1,7 @@
 # Aircraft Engine Predictive Maintenance
 
+![](outputs/figures/fleet_risk_ranking.png)
+
 **Predicting Remaining Useful Life (RUL) using NASA CMAPSS Dataset**
 
 This repository presents an end-to-end predictive maintenance pipeline for aircraft engines using multivariate time-series sensor data.
