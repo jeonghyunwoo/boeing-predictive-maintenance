@@ -1,5 +1,6 @@
 # Aircraft Engine Predictive Maintenance
 
+This project demonstrates a predictive maintenance workflow for aircraft engines by estimating Remaining Useful Life (RUL) from NASA CMAPSS sensor data and translating predictions into fleet maintenance priorities.
 ![](outputs/figures/fleet_risk_ranking.png)
 
 **Predicting Remaining Useful Life (RUL) using NASA CMAPSS Dataset**
