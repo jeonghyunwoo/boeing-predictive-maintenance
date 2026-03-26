@@ -1,1 +1,3 @@
-"""Model training utilities for RUL prediction."""
+"""
+Model training module for RUL prediction.
+"""
