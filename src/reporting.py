@@ -1,1 +1,3 @@
-"""Maintenance brief generation utilities."""
+"""
+Inference utilities for predicting engine Remaining Useful Life.
+"""
