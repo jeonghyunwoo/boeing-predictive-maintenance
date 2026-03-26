@@ -1,174 +1,157 @@
+
 # Aircraft Engine Predictive Maintenance
+### Remaining Useful Life (RUL) Prediction using NASA CMAPSS FD001
 
-This project demonstrates a predictive maintenance workflow for aircraft engines by estimating Remaining Useful Life (RUL) from NASA CMAPSS sensor data and translating predictions into fleet maintenance priorities.
-![](outputs/figures/fleet_risk_ranking.png)
-
-**Predicting Remaining Useful Life (RUL) using NASA CMAPSS Dataset**
-
-This repository presents an end-to-end predictive maintenance pipeline for aircraft engines using multivariate time-series sensor data.
-
-The project demonstrates how machine learning can transform raw sensor signals into actionable maintenance decisions, including fleet-level maintenance prioritization.
-
-The workflow includes exploratory data analysis, feature engineering for degradation signals, model training, test-set evaluation, and operational interpretation of model outputs.
+This project demonstrates a predictive maintenance workflow for aircraft engines by estimating **Remaining Useful Life (RUL)** from NASA **CMAPSS turbofan engine sensor data** and translating predictions into **fleet maintenance priorities**.
 
 ---
 
-# Project Objective
+## Project Overview
 
-Aircraft engine failures are rare but costly events that can cause significant operational disruption.
+Aircraft engines generate large volumes of telemetry data from multiple sensors. Predicting **Remaining Useful Life (RUL)** allows maintenance teams to:
 
-Predictive maintenance aims to estimate the **Remaining Useful Life (RUL)** of engines using sensor telemetry so that maintenance can be scheduled proactively.
+- anticipate component failures
+- schedule maintenance proactively
+- reduce unexpected downtime
+- prioritize engines requiring urgent inspection
 
-This project builds a machine learning pipeline to:
-
-* estimate engine RUL from sensor data
-* evaluate prediction performance on unseen engines
-* translate predictions into **fleet maintenance prioritization**
-
----
-
-# Dataset
-
-The project uses the **NASA CMAPSS turbofan engine degradation simulation dataset**.
-
-Dataset characteristics:
-
-* multiple engine degradation trajectories
-* 21 sensor measurements
-* 3 operational settings
-* target variable: Remaining Useful Life (RUL)
-
-Each engine operates normally before gradually degrading until failure.
-
-Dataset reference:
-NASA Prognostics Center – CMAPSS Dataset
+This project builds a baseline predictive maintenance model using the NASA **CMAPSS turbofan engine degradation dataset**, focusing on the **FD001 subset**.
 
 ---
 
-# Workflow
+## Engine Degradation Behavior
 
-## 1. Exploratory Data Analysis
+The dataset simulates the degradation trajectory of turbofan engines as they approach failure.
 
-Sensor data was analyzed to identify signals related to engine degradation.
+![Engine degradation](outputs/figures/engine_degradation_trajectory.png)
 
-Key analyses included:
-
-* sensor variability analysis
-* correlation between sensors and RUL
-* degradation trajectories across engines
-* sensor correlation structure
-
-Example visualization:
-
-![](outputs/figures/sensor_variability.png)
+Understanding degradation patterns helps identify early warning signals before engine failure.
 
 ---
 
-## 2. Feature Engineering
+## Feature Engineering
 
-Raw sensor readings were transformed into degradation-aware features.
+To capture degradation dynamics, the following features were created:
 
-Feature types:
+- rolling mean
+- rolling standard deviation
+- first differences
+- lifecycle features
 
-* rolling mean
-* rolling standard deviation
-* first differences
-
-These features capture short-term trends and degradation dynamics in sensor behavior.
-
----
-
-## 3. Model Training
-
-A **RandomForest regression model** was used as the baseline predictive model.
-
-Key design choices:
-
-* engine-level validation to prevent trajectory leakage
-* feature engineering applied consistently to train and test data
-* model trained on degradation-related sensor features
+These features summarize both **sensor behavior** and **degradation trends over time**.
 
 ---
 
-## 4. Model Performance
+## Model
 
-Model predictions were evaluated on both validation and official CMAPSS test data.
+A **RandomForest regression model** was used as a baseline model to predict engine Remaining Useful Life.
 
-Performance metrics:
+RandomForest was selected because:
 
-* Validation RMSE: **33.47**
-* Test RMSE: **34.63**
-
-Prediction accuracy visualization:
-
-![](outputs/figures/test_prediction_vs_actual.png)
+- it handles nonlinear relationships effectively  
+- it performs well on tabular engineered features  
+- it is robust to noisy sensor signals  
+- it provides a strong and interpretable baseline
 
 ---
 
-## 5. Feature Importance
+## Model Performance
 
-Model interpretation reveals which sensor signals contribute most strongly to RUL prediction.
+Model performance was evaluated using **Root Mean Squared Error (RMSE)**.
 
-![](outputs/figures/feature_importance.png)
+| Dataset | RMSE |
+|--------|------|
+| Validation | 33.47 |
+| Test | 34.63 |
 
-These results highlight sensors that carry strong degradation signals.
+Prediction results:
 
----
+![Prediction vs Actual](outputs/figures/prediction_vs_actual.png)
 
-## 6. Fleet Maintenance Prioritization
-
-Predicted RUL values were converted into fleet-level maintenance priorities.
-
-Engines with the lowest predicted RUL are considered highest maintenance risk.
-
-![](outputs/figures/fleet_risk_ranking.png)
-
-Fleet risk distribution:
-
-![](outputs/figures/fleet_risk_distribution.png)
-
-This step demonstrates how predictive models can support operational maintenance planning.
+The model captures degradation patterns and provides reasonable baseline RUL estimates.
 
 ---
 
-# Project Report
+## Fleet Maintenance Prioritization
 
-A detailed HTML report generated using **Quarto** is available in:
+Predicted RUL values can be translated into maintenance priorities across a fleet of aircraft engines.
+
+![Fleet ranking](outputs/figures/fleet_risk_ranking.png)
+
+This demonstrates how predictive maintenance models support **operational maintenance planning**.
+
+Example logic:
+
+```
+if predicted_RUL < threshold:
+    schedule_maintenance
+else:
+    continue_operation
+```
+
+---
+
+## Repository Structure
+
+```
+boeing-predictive-maintenance/
+│
+├── aircraft_sensor_analysis.ipynb
+├── outputs/
+│   └── figures/
+├── reports/
+│   └── predictive_maintenance_report.html
+└── README.md
+```
+
+---
+
+## Quick Start
+
+Open the notebook:
+
+```
+aircraft_sensor_analysis.ipynb
+```
+
+View the final report:
 
 ```
 reports/predictive_maintenance_report.html
 ```
 
-The report summarizes the full analytical workflow and visual results.
-
----
-
-# Repository Structure
+Generated figures are located in:
 
 ```
-.
-├─ aircraft_sensor_analysis.ipynb
-├─ eda/
-│  ├─ sensor_eda.R
-│  └─ sensor_eda.qmd
-├─ outputs/
-│  └─ figures/
-├─ reports/
-│  ├─ predictive_maintenance_report.qmd
-│  └─ predictive_maintenance_report.html
-├─ src/
-├─ README.md
-└─ .gitignore
+outputs/figures/
 ```
 
 ---
 
-# Key Takeaways
+## Future Improvements
 
-This project demonstrates how predictive maintenance models can convert raw telemetry data into operational insights.
+Possible extensions include:
 
-Key outcomes:
+- testing gradient boosting models (XGBoost / LightGBM)
+- experimenting with sequence models such as LSTM
+- estimating prediction uncertainty
+- extending the pipeline to additional CMAPSS subsets
 
-* degradation-aware feature engineering for sensor data
-* machine learning-based RUL prediction
-* evaluation on unseen engines
+---
+
+## Technologies Used
+
+- Python
+- pandas
+- NumPy
+- scikit-learn
+- matplotlib
+- seaborn
+- Quarto
+
+---
+
+## Author
+
+Hyunwoo Jeong  
+GitHub: https://github.com/jeonghyunwoo
