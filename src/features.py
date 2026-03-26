@@ -1,1 +1,3 @@
-"""Feature engineering utilities for rolling statistics and degradation signals."""
+"""
+Feature engineering functions for sensor degradation signals.
+"""
