@@ -114,6 +114,19 @@ See the complete analysis:
 
 ---
 
+## Data
+
+This project uses the NASA CMAPSS FD001 dataset.
+
+Place the dataset files under `data/` before running the notebook.
+
+Expected files:
+- `data/train_FD001.txt`
+- `data/test_FD001.txt`
+- `data/RUL_FD001.txt`
+
+---
+
 ## Repository Structure
 
 ```text
