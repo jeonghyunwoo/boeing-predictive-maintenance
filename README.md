@@ -121,7 +121,6 @@ See the complete analysis:
 ├── predictive_maintenance_rul_model.ipynb   # main analysis notebook
 ├── reports/
 │   ├── predictive_maintenance_report.html   # final report (exported)
-│   └── predictive_maintenance_report.qmd
 ├── outputs/
 │   └── figures/                             # generated plots
 └── README.md
