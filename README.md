@@ -110,7 +110,7 @@ This allows the model to account for **different operating regimes**.
 
 See the complete analysis:
 
-- `reports/predictive_maintenance_report.html`
+- `reports/predictive_maintenance_rul_model.html`
 
 ---
 
@@ -120,7 +120,7 @@ See the complete analysis:
 .
 ├── predictive_maintenance_rul_model.ipynb   # main analysis notebook
 ├── reports/
-│   ├── predictive_maintenance_report.html   # final report (exported)
+│   ├── predictive_maintenance_rul_model.html   # final report
 ├── outputs/
 │   └── figures/                             # generated plots
 └── README.md
