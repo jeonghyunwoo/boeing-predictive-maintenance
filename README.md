@@ -139,7 +139,7 @@ predictive_maintenance_rul_model.ipynb
 View the final report:
 
 ```text
-reports/predictive_maintenance_report.html
+reports/predictive_maintenance_rul_model.html
 ```
 
 ---
@@ -152,7 +152,6 @@ reports/predictive_maintenance_report.html
 - LightGBM / XGBoost
 - matplotlib / seaborn
 - SHAP
-- Quarto
 
 ---
 
